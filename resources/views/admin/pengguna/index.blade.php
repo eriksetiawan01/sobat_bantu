@@ -12,7 +12,7 @@
         <div class="flex-1 p-6">
             <div style="background-color: #DBDFE6" class="py-4 rounded-lg border">
                 <div class="d-flex justify-content-between align-items-center px-4 mb-3">
-                    <a href="{{ route('admin.penyediajasa.create') }}" class="btn fw-semibold" style="background-color: #27547D; color:#FFFFFF;" onmouseover="this.style.backgroundColor='#FFFFFF'; this.style.color='#27547D';" 
+                    <a href="{{ route('admin.pengguna.create') }}" class="btn fw-semibold" style="background-color: #27547D; color:#FFFFFF;" onmouseover="this.style.backgroundColor='#FFFFFF'; this.style.color='#27547D';" 
                     onmouseout="this.style.backgroundColor='#27547D'; this.style.color='#FFFFFF';">+ Tambah Pengguna</a>
                     <div class="relative">
                         <input class="form-control pl-10 pr-4 py-2" placeholder="Search here..." type="text"/>

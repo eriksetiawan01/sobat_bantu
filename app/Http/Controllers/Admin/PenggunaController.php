@@ -27,7 +27,32 @@ class PenggunaController extends Controller
      */
     public function store(Request $request)
     {
-       
+        // Validasi input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username',
+            'no_telepon' => 'required|string|max:15',
+            'email' => 'required|email|max:255|unique:users,email',
+            'birthday' => 'required|date',
+            'gender' => 'required|in:male,female',
+            'alamat' => 'required|string|max:255',
+            'password' => 'required|string|min:8|confirmed',
+    ]);
+
+        // Tambahkan pengguna baru
+        User::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'no_telepon' => $request->no_telepon,
+            'email' => $request->email,
+            'birthday' => $request->birthday,
+            'gender' => $request->gender,
+            'alamat' => $request->alamat,
+            'password' => bcrypt($request->password),
+    ]);
+
+    // Redirect dengan pesan sukses
+    return redirect()->route('admin.pengguna.index')->with('success', 'Pengguna baru berhasil ditambahkan.');
     }
 
     /**

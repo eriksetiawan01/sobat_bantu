@@ -57,6 +57,8 @@ Route::middleware('auth')->group(function () {
 
     // route untuk data pengguna
     Route::get('/dashboard/pengguna', [AdminPenggunaController::class, 'index'])->name('admin.pengguna.index');
+    Route::get('/dashboard/pengguna/create', [AdminPenggunaController::class, 'create'])->name('admin.pengguna.create');
+    Route::post('/dashboard/pengguna/', [AdminPenggunaController::class, 'store'])->name('admin.pengguna.store');
     Route::get('/dashboard/pengguna/{id}', [AdminPenggunaController::class, 'show'])->name('admin.pengguna.show');
     Route::get('/dashboard/pengguna/{id}/edit', [AdminPenggunaController::class, 'edit'])->name('admin.pengguna.edit');
     Route::put('/dashboard/pengguna/{id}', [AdminPenggunaController::class, 'update'])->name('admin.pengguna.update');
