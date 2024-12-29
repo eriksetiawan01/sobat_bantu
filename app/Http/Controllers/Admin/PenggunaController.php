@@ -42,7 +42,9 @@ class PenggunaController extends Controller
 
     public function edit(string $id)
     {
-        
+        // Cari pengguna berdasarkan ID
+        $pengguna = User::findOrFail($id);
+        return view('admin.pengguna.edit', compact('pengguna'));
     }
 
     /**
@@ -50,7 +52,31 @@ class PenggunaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+        // Validasi input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username,' . $id,
+            'no_telepon' => 'required|string|max:15',
+            'email' => 'required|email|max:255|unique:users,email,' . $id,
+            'birthday' => 'required|date',
+            'gender' => 'required|in:male,female',
+            'alamat' => 'required|string|max:255',
+        ]);
+
+        // Cari pengguna berdasarkan ID
+        $pengguna = User::findOrFail($id);
+        $pengguna->update([
+            'name' => $request->name,
+            'username' => $request->username,
+            'no_telepon' => $request->no_telepon,
+            'email' => $request->email,
+            'birthday' => $request->birthday,
+            'gender' => $request->gender,
+            'alamat' => $request->alamat,
+        ]);
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('admin.pengguna.index')->with('success', 'Pengguna berhasil diperbarui.');
     }
 
     /**
