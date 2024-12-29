@@ -17,6 +17,7 @@ use App\Http\Controllers\Pengguna\LayananJasaController as PenggunaLayananJasaCo
 use App\Http\Controllers\Admin\LayananJasaController as AdminLayananJasaController;
 use App\Http\Controllers\Admin\KategoriController as AdminKategoriController;
 use App\Http\Controllers\Admin\PenyediaJasaController as AdminPenyediaJasaController;
+use App\Http\Controllers\Admin\PenggunaController as AdminPenggunaController;
 
 
 // Penyedia Jasa
@@ -35,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.index');
     })->name('admin.index');
+
+    // route untuk data layanan jasa
     Route::get('/dashboard/layananjasa', [AdminLayananJasaController::class, 'index'])->name('admin.layananjasa.index'); // Menggunakan alias
     Route::get('/dashboard/layananjasa/create', [AdminLayananJasaController::class, 'create']); // Menggunakan alias
     Route::post('/dashboard/layananjasa', [AdminLayananJasaController::class, 'store'])->name('admin.layananjasa.store'); // Menyimpan layanan jasa baru
@@ -43,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/dashboard/layananjasa/{id}', [AdminLayananJasaController::class, 'update'])->name('admin.layananjasa.update');
     Route::delete('/dashboard/layananjasa/{id}', [AdminLayananJasaController::class, 'destroy'])->name('admin.layananjasa.destroy');
 
+    // route untuk data kategori
     Route::get('/dashboard/kategori', [AdminKategoriController::class, 'index'])->name('admin.kategori.index'); 
     Route::get('/dashboard/kategori/create', [AdminKategoriController::class, 'create']);
     Route::post('/dashboard/kategori/store', [AdminKategoriController::class, 'store'])->name('admin.kategori.store');
@@ -51,6 +55,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/dashboard/kategori/{id}', [AdminKategoriController::class, 'update'])->name('admin.kategori.update');
     Route::delete('/dashboard/kategori/{id}', [AdminKategoriController::class, 'destroy'])->name('admin.kategori.destroy');
 
+    // route untuk data pengguna
+    Route::get('/dashboard/pengguna', [AdminPenggunaController::class, 'index'])->name('admin.pengguna.index');
+
+    // route untuk data penyedia jasa
     Route::get('/dashboard/penyediajasa', [AdminPenyediaJasaController::class, 'index'])->name('admin.penyediajasa.index'); 
     Route::get('/dashboard/penyediajasa/create', [AdminPenyediaJasaController::class, 'create'])->name('admin.penyediajasa.create');
     Route::post('/dashboard/penyediajasa', [AdminPenyediaJasaController::class, 'store'])->name('admin.penyediajasa.store');

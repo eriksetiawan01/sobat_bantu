@@ -16,7 +16,7 @@
               <i class="bi bi-layout-text-window-reverse"></i><span>Data Tables</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-              <li><a href="tables-general.html"><i class="bi bi-people fs-6"></i><span>Data Pengguna</span></a></li>
+              <li><a href="/dashboard/pengguna"><i class="bi bi-people fs-6"></i><span>Data Pengguna</span></a></li>
               <li><a href="/dashboard/penyediajasa"><i class="bi bi-briefcase fs-6"></i><span>Data Penyedia Jasa</span></a></li>
               <li><a href="/dashboard/kategori"><i class="bi bi-tags fs-6"></i><span>Data Kategori</span></a></li>
               <li><a href="/dashboard/layananjasa"><i class="bi bi-box fs-6"></i><span>Data Layanan Jasa</span></a></li>

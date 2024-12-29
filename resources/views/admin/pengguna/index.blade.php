@@ -1,15 +1,19 @@
 <x-layout>
-    <x-slot name="page_name">Halaman Kategori Jasa</x-slot>
-    <x-slot name="title"><h6>Data Kategori Jasa</h6></x-slot>
+    <x-slot name="page_name">Halaman Pengguna</x-slot>
+    <x-slot name="title"><h6>Data Pengguna</h6></x-slot>
     <x-slot name="page_content">
-        
-
         <!-- Main content -->
+        @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
         <div class="flex-1 p-6">
             <div style="background-color: #DBDFE6" class="py-4 rounded-lg border">
                 <div class="d-flex justify-content-between align-items-center px-4 mb-3">
-                    <a href="{{ url('/dashboard/kategori/create') }}" class="btn fw-semibold" style="background-color: #27547D; color:#FFFFFF;" onmouseover="this.style.backgroundColor='#FFFFFF'; this.style.color='#27547D';" 
-                    onmouseout="this.style.backgroundColor='#27547D'; this.style.color='#FFFFFF';">+ Tambah Kategori Jasa</a>
+                    <a href="{{ route('admin.penyediajasa.create') }}" class="btn fw-semibold" style="background-color: #27547D; color:#FFFFFF;" onmouseover="this.style.backgroundColor='#FFFFFF'; this.style.color='#27547D';" 
+                    onmouseout="this.style.backgroundColor='#27547D'; this.style.color='#FFFFFF';">+ Tambah Pengguna</a>
                     <div class="relative">
                         <input class="form-control pl-10 pr-4 py-2" placeholder="Search here..." type="text"/>
                         <i class="fas fa-search position-absolute left-3 top-3 text-muted"></i>
@@ -21,27 +25,31 @@
                             <tr>
                                 <th class="py-3">No</th>
                                 <th class="py-3">Nama</th>
+                                <th class="py-3">Gender</th>
+                                <th class="py-3">Alamat</th>
                                 <th class="py-3">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($kategoris as $kategori)
+                            @foreach ($penggunas as $pengguna)
                                 <tr class="text-center {{ $loop->odd ? 'table-light' : 'table-white' }}">
                                     <td class="py-2">{{ $loop->iteration }}</td>
-                                    <td class="py-2">{{ $kategori->nama }}</td>
+                                    <td class="py-2">{{ $pengguna->name }}</td>
+                                    <td class="py-2">{{ $pengguna->gender }}</td>
+                                    <td class="py-2">{{ $pengguna->alamat }}</td>
                                     <td class="py-2">
                                         <!-- Tombol Lihat -->
-                                        <a href="{{ url('/dashboard/kategori/' . $kategori->id) }}" class="text-warning" title="Lihat">
+                                        <a href="{{ url('/dashboard/pengguna/' . $pengguna->id) }}" class="text-warning" title="Lihat">
                                             <i class="fa fa-eye"></i>
                                         </a>
 
                                         <!-- Tombol Edit -->
-                                        <a href="{{ url('/dashboard/kategori/' . $kategori->id . '/edit') }}" class="text-primary mx-2" title="Edit">
+                                        <a href="{{ url('/dashboard/pengguna/' . $pengguna->id . '/edit') }}" class="text-primary mx-2" title="Edit">
                                             <i class="fa fa-edit"></i>
                                         </a>
 
                                         <!-- Tombol Hapus -->
-                                        <form action="{{ url('/dashboard/kategori/' . $kategori->id) }}" method="POST" class="d-inline">
+                                        <form action="{{ url('/dashboard/pengguna/' . $pengguna->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-danger" title="Hapus">
