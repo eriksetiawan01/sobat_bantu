@@ -35,7 +35,9 @@ class PenggunaController extends Controller
      */
     public function show(string $id)
     {
-       
+       // Cari pengguna berdasarkan ID
+       $pengguna = User::findOrFail($id);
+       return view('admin.pengguna.show', compact('pengguna'));
     }
 
     public function edit(string $id)

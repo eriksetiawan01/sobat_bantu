@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function () {
 
     // route untuk data pengguna
     Route::get('/dashboard/pengguna', [AdminPenggunaController::class, 'index'])->name('admin.pengguna.index');
+    Route::get('/dashboard/pengguna/{id}', [AdminPenggunaController::class, 'show'])->name('admin.pengguna.show');
 
     // route untuk data penyedia jasa
     Route::get('/dashboard/penyediajasa', [AdminPenyediaJasaController::class, 'index'])->name('admin.penyediajasa.index'); 
