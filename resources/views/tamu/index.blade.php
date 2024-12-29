@@ -25,7 +25,7 @@
         Cari layanan terbaik di sekitar Anda dengan Sobat.
       </p>
       <!-- Button -->
-      <a href="#pesan"
+      <a href="/layanan"
         class="bg-[#3F8CFF] text-white border-2 border-white py-2 px-4 md:py-3 md:px-6 rounded-lg text-base md:text-lg hover:bg-[#3578d4] transition inline-block">
         <i class="fa-solid fa-paper-plane"></i> Pesan Sekarang
       </a>
@@ -90,7 +90,7 @@
             Soban (Sobat Bantu) adalah platform yang menghubungkan Anda dengan tenaga bantuan profesional untuk menyelesaikan berbagai tugas harian,
             mulai dari berbelanja, mengirim barang, hingga aneka keperluan lainnya.
           </p>
-          <a href="#coba-sekarang" class="bg-[#27547D] text-white border-2 border-white py-2 px-4 sm:py-3 sm:px-6 lg:py-3 lg:px-6 rounded-lg text-sm sm:text-base lg:text-lg hover:bg-[#3578d4] transition">
+          <a href="/layanan" class="bg-[#27547D] text-white border-2 border-white py-2 px-4 sm:py-3 sm:px-6 lg:py-3 lg:px-6 rounded-lg text-sm sm:text-base lg:text-lg hover:bg-[#3578d4] transition">
             <i class="fa-solid fa-paper-plane"></i> Coba Sekarang
           </a>
         </div>

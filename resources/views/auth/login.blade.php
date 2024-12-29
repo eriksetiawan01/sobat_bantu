@@ -17,6 +17,12 @@
     <h2 class="text-4xl text-center font-bold mb-3 text-white">Login ke Akun Soban</h2>
 </section>
 
+@if(session('alert'))
+    <div class="alert alert-warning">
+        {{ session('alert') }}
+    </div>
+@endif
+
 {{-- main --}}
 <main class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
     <div class="bg-white p-8 rounded rounded-lg border border-2 shadow-md w-full max-w-md -mt-20">

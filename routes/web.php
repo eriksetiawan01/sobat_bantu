@@ -9,6 +9,10 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Tamu\BerandaController as TamuBerandaController;
 use App\Http\Controllers\Tamu\LayananJasaController as TamuLayananJasaController;
 
+// Pengguna
+use App\Http\Controllers\Pengguna\BerandaController as PenggunaBerandaController;
+use App\Http\Controllers\Pengguna\LayananJasaController as PenggunaLayananJasaController;
+
 // admin
 use App\Http\Controllers\Admin\LayananJasaController as AdminLayananJasaController;
 use App\Http\Controllers\Admin\KategoriController as AdminKategoriController;
@@ -23,6 +27,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/index', function () {
         return view('user.index');
     })->name('user.index');
+    Route::get('/', [PenggunaBerandaController::class, 'index'])->name('user.beranda');
+    Route::get('/user/layanan', [PenggunaLayananJasaController::class, 'index'])->name('user.layanan');
+    Route::get('/layanan/{id}', [PenggunaLayananJasaController::class, 'show'])->name('layanan.show');
 
     // Route Role Admin
     Route::get('/dashboard', function () {
@@ -56,13 +63,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/penyediajasa/index', function () {
         return view('penyediajasa.index');
     })->name('penyediajasa.index');
+    Route::get('/penyediajasa/layananjasa', [PenyediaJasaLayananJasaController::class, 'index'])->name('penyediajasa.layananjasa.index');
+        Route::get('/penyediajasa/layananjasa/create', [PenyediaJasaLayananJasaController::class, 'create'])->name('penyediajasa.layananjasa.create');
+        Route::post('/penyediajasa/layananjasa', [PenyediaJasaLayananJasaController::class, 'store'])->name('penyediajasa.layananjasa.store');
 });
 
 
 // Tamu
 Route::get('/', [TamuBerandaController::class, 'index'])->name('tamu.beranda');
-Route::get('/layanan', [TamuLayananJasaController::class, 'index']);
+Route::get('/layanan', [TamuLayananJasaController::class, 'index'])->name('tamu.layanan');
 Route::get('/layanan/{id}', [TamuLayananJasaController::class, 'show'])->name('layanan.show');
+Route::get('/layanan/{layananId}/pesan', [TamuLayananJasaController::class, 'pesanLayanan'])->name('layanan.pesan');
 
 // Route Dashboard Admin
 // Route::get('/dashboard/layananjasa', [AdminLayananJasaController::class, 'index'])->name('admin.layananjasa.index'); // Menggunakan alias

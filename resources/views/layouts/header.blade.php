@@ -15,17 +15,17 @@
 
         <!-- Navigation -->
         <nav id="nav-links" class="hidden md:flex space-x-6">
-            <a href="/" class="flex items-center space-x-1 hover:text-blue-300">
+            <a href="{{ route(auth()->check() ? 'user.index' : 'tamu.beranda') }}" class="flex items-center space-x-1 hover:text-blue-300">
                 <i class="fas fa-home"></i><span>Beranda</span>
-            </a>
+            </a>            
             @auth
             <a href="#pesanan" class="flex items-center space-x-1 hover:text-blue-300">
                 <i class="fa-solid fa-clipboard-list"></i><span>Pesanan</span>
             </a>
             @endauth
-            <a href="/layanan" class="flex items-center space-x-1 hover:text-blue-300">
+            <a href="{{ auth()->check() ? route('user.layanan') : route('tamu.layanan') }}" class="flex items-center space-x-1 hover:text-blue-300">
                 <i class="fas fa-cogs"></i><span>Layanan</span>
-            </a>
+            </a>            
             <a href="/#tentang" class="flex items-center space-x-1 hover:text-blue-300">
                 <i class="fa-solid fa-users"></i><span>Tentang Kami</span>
             </a>
@@ -49,7 +49,7 @@
                 <!-- Profile Dropdown -->
                 <div class="relative">
                     <button id="profile-button" class="flex items-center space-x-2 focus:outline-none">
-                        <img src="{{ asset('asset/img/user-placeholder.png') }}" alt="Profile" class="w-8 h-8 rounded-full">
+                        <img src="{{ asset('asset/img/Foto Profil.png') }}" alt="Profile" class="w-8 h-8 rounded-full">
                         <span class="text-sm font-semibold">{{ Auth::user()->name }}</span>
                     </button>
                     <div id="profile-menu" class="hidden absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded shadow-lg">

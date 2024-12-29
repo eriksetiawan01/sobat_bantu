@@ -80,7 +80,7 @@
       <h1 id="tentang" class="text-5xl font-extrabold text-[#27547D] mb-4">Tentang Kami</h1>
     </div>
   </section>
-  <section class="bg-[#F1F8FF] py-16 mx-8 rounded-3xl" style="background-image: url('asset/img/background tentang kami.png'); background-size: auto; background-position: center;">
+  <section class="bg-[#F1F8FF] py-16 mx-8 rounded-3xl" style="background-image: url('/asset/img/background tentang kami.png'); background-size: auto; background-position: center;">
     <div class="container mx-auto px-6 text-center">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <!-- Kolom Kiri: Teks -->
@@ -90,7 +90,7 @@
             Soban (Sobat Bantu) adalah platform yang menghubungkan Anda dengan tenaga bantuan profesional untuk menyelesaikan berbagai tugas harian,
             mulai dari berbelanja, mengirim barang, hingga aneka keperluan lainnya.
           </p>
-          <a href="#coba-sekarang" class="bg-[#27547D] text-white border-2 border-white py-2 px-4 sm:py-3 sm:px-6 lg:py-3 lg:px-6 rounded-lg text-sm sm:text-base lg:text-lg hover:bg-[#3578d4] transition">
+          <a href="/user/layanan" class="bg-[#27547D] text-white border-2 border-white py-2 px-4 sm:py-3 sm:px-6 lg:py-3 lg:px-6 rounded-lg text-sm sm:text-base lg:text-lg hover:bg-[#3578d4] transition">
             <i class="fa-solid fa-paper-plane"></i> Coba Sekarang
           </a>
         </div>
@@ -133,7 +133,7 @@
     <div class="container mx-auto flex flex-col md:flex-row items-center">
       <!-- Bagian Kiri (Foto) -->
       <div class="md:w-1/2 mb-8 md:mb-0 mx-8">
-        <img src="asset/img/gambar 1.png" alt="Keunggulan Kami Image" class="w-full h-50 rounded-lg">
+        <img src="/asset/img/gambar 1.png" alt="Keunggulan Kami Image" class="w-full h-50 rounded-lg">
       </div>
   
       <!-- Bagian Kanan (Keunggulan) -->

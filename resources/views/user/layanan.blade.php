@@ -16,12 +16,6 @@
   <section class="bg-[#27547D] py-2">
       <h2 class="text-4xl text-center font-bold mb-3 text-white">Layanan Jasa</h2>
   </section>
-  @if(session('error'))
-    <div id="alert-message" class="alert alert-warning text-center py-3" style="background-color: #f8d7da; color: #721c24; position: relative;">
-        <button id="close-alert" class="absolute top-1 right-2 text-lg font-bold cursor-pointer">&times;</button>
-        <strong>{{ session('error') }}</strong>
-    </div>
-  @endif
   <section class="container mx-auto max-w-6xl py-8">
     <div class="flex items-center gap-4 mb-8">
       <!-- Search Bar -->
@@ -104,11 +98,11 @@
               <span class="text-base text-black-300">Rp {{ number_format($layanan->harga, 0, ',', '.') }}</span>
             </div>
             <!-- Order Button -->
-            <div class="text-center">
+            <div class="text-end">
               <a href="{{ route('layanan.show', $layanan->id) }}">
                 <button class="bg-amber-500 text-white px-3 py-1 rounded-md hover:bg-blue-700">Lihat</button>
               </a>
-              <a href="{{ route('layanan.pesan', $layanan->id) }}">
+              <a href="#">
                 <button class="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700">Pesan</button>
               </a>
             </div>
@@ -157,16 +151,8 @@
     });
   </script>
 
-<script>
-  // Ambil elemen tombol "x" dan alert message
-  const closeButton = document.getElementById('close-alert');
-  const alertMessage = document.getElementById('alert-message');
 
-  // Event listener untuk menutup alert ketika tombol "x" diklik
-  closeButton.addEventListener('click', function() {
-      alertMessage.style.display = 'none';  // Sembunyikan elemen alert
-  });
-</script>
+
 
 
   <!-- Footer -->
