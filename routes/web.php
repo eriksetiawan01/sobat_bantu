@@ -62,6 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/pengguna/{id}', [AdminPenggunaController::class, 'show'])->name('admin.pengguna.show');
     Route::get('/dashboard/pengguna/{id}/edit', [AdminPenggunaController::class, 'edit'])->name('admin.pengguna.edit');
     Route::put('/dashboard/pengguna/{id}', [AdminPenggunaController::class, 'update'])->name('admin.pengguna.update');
+    Route::delete('/dashboard/pengguna/{id}', [AdminPenggunaController::class, 'destroy'])->name('admin.pengguna.destroy');
 
     // route untuk data penyedia jasa
     Route::get('/dashboard/penyediajasa', [AdminPenyediaJasaController::class, 'index'])->name('admin.penyediajasa.index'); 
