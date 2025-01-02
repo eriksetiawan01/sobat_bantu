@@ -12,19 +12,9 @@ class Pesanan extends Model
     protected $table = 'pesanan';
 
     protected $fillable = [
-        'user_id',
-        'layanan_jasa_id',
-        'penyedia_jasa_id',
-        'nama_lengkap',
-        'alamat',
-        'no_telepon',
-        'waktu_pemesanan',
-        'jam_pemesanan',
-        'detail_pekerjaan',
-        'harga',
-        'status_pembayaran',
-        'status_pesanan',
-        'ulasan'
+        'user_id', 'layanan_jasa_id', 'penyedia_jasa_id', 'nama_lengkap', 
+        'alamat', 'no_telepon', 'waktu_pemesanan', 'jam_pemesanan', 
+        'detail_pekerjaan', 'harga', 'status_pembayaran', 'status_pesanan', 'ulasan'
     ];
 
     public function user()
@@ -34,7 +24,7 @@ class Pesanan extends Model
 
     public function layananJasa()
     {
-        return $this->belongsTo(LayananJasa::class);
+        return $this->belongsTo(LayananJasa::class, 'layanan_jasa_id');
     }
 
     public function penyediaJasa()

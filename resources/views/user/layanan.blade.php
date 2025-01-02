@@ -102,7 +102,7 @@
               <a href="{{ route('layanan.show', $layanan->id) }}">
                 <button class="bg-amber-500 text-white px-3 py-1 rounded-md hover:bg-blue-700">Lihat</button>
               </a>
-              <a href="#">
+              <a href="{{ route('form_pemesanan', ['layanan_id' => $layanan->id]) }}">
                 <button class="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700">Pesan</button>
               </a>
             </div>

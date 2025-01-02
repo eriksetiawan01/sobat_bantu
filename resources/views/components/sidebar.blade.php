@@ -31,7 +31,7 @@
           </a>
           <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
               <li><a href="{{ route('penyediajasa.layananjasa.index', ['penyediaId' => Auth::id()]) }}"><i class="bi bi-box fs-6"></i><span>Data Layanan Jasa</span></a></li>
-              <li><a href="tables-data.html"><i class="bi bi-receipt fs-6"></i><span>Data Pesanan</span></a></li>
+              <li><a href="{{ route('penyediajasa.pesanan.index', ['penyediaId' => Auth::id()]) }}"><i class="bi bi-receipt fs-6"></i><span>Data Pesanan</span></a></li>
           </ul>
       </li><!-- End Tables Nav -->
       @endif

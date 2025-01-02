@@ -12,6 +12,8 @@ use App\Http\Controllers\Tamu\LayananJasaController as TamuLayananJasaController
 // Pengguna
 use App\Http\Controllers\Pengguna\BerandaController as PenggunaBerandaController;
 use App\Http\Controllers\Pengguna\LayananJasaController as PenggunaLayananJasaController;
+use App\Http\Controllers\Pengguna\FormPemesananController as PenggunaFormPemesananController;
+use App\Http\Controllers\Pengguna\PesananController as PenggunaPesananController;
 
 // admin
 use App\Http\Controllers\Admin\LayananJasaController as AdminLayananJasaController;
@@ -22,15 +24,27 @@ use App\Http\Controllers\Admin\PenggunaController as AdminPenggunaController;
 
 // Penyedia Jasa
 use App\Http\Controllers\PenyediaJasa\LayananJasaController as PenyediaJasaLayananJasaController;
+use App\Http\Controllers\PenyediaJasa\PesananController as PenyediaPesananController;
 
 Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
 Route::middleware('auth')->group(function () {
+    // Route Pengguna
     Route::get('/user/index', function () {
         return view('user.index');
     })->name('user.index');
     Route::get('/', [PenggunaBerandaController::class, 'index'])->name('user.beranda');
     Route::get('/user/layanan', [PenggunaLayananJasaController::class, 'index'])->name('user.layanan');
     Route::get('/layanan/{id}', [PenggunaLayananJasaController::class, 'show'])->name('layanan.show');
+
+    // Pemesanan
+    Route::get('/form_pemesanan/{layanan_id}', [PenggunaFormPemesananController::class, 'index'])->name('form_pemesanan');
+    Route::post('/form_pemesanan', [PenggunaFormPemesananController::class, 'store'])->name('form_pemesanan.store');
+    Route::get('/user/pesanan', [PenggunaPesananController::class, 'index'])->name('user.pesanan');
+    Route::get('/user/pesanan/{id}', [PenggunaPesananController::class, 'show'])->name('user.pesanan.show');
+
+
+    
+
 
     // Route Role Admin
     Route::get('/dashboard', function () {
@@ -77,9 +91,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/penyediajasa/index', function () {
         return view('penyediajasa.index');
     })->name('penyediajasa.index');
+    // Layanan Jasa
     Route::get('/penyediajasa/layananjasa', [PenyediaJasaLayananJasaController::class, 'index'])->name('penyediajasa.layananjasa.index');
-        Route::get('/penyediajasa/layananjasa/create', [PenyediaJasaLayananJasaController::class, 'create'])->name('penyediajasa.layananjasa.create');
-        Route::post('/penyediajasa/layananjasa', [PenyediaJasaLayananJasaController::class, 'store'])->name('penyediajasa.layananjasa.store');
+        Route::get('/penyediajasa/{penyediaId}/layananjasa/create', [PenyediaJasaLayananJasaController::class, 'create'])->name('penyediajasa.layananjasa.create');
+        Route::post('/penyediajasa/{id}/layananjasa', [PenyediaJasaLayananJasaController::class, 'store'])->name('penyediajasa.layananjasa.store');
+
+    // Pesanan
+    Route::get('/penyediajasa/pesanan', [PenyediaPesananController::class, 'index'])->name('penyediajasa.pesanan.index');
+
+
 });
 
 

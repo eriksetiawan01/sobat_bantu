@@ -19,7 +19,7 @@
                 <i class="fas fa-home"></i><span>Beranda</span>
             </a>            
             @auth
-            <a href="#pesanan" class="flex items-center space-x-1 hover:text-blue-300">
+            <a href="{{ route('user.pesanan')}}" class="flex items-center space-x-1 hover:text-blue-300">
                 <i class="fa-solid fa-clipboard-list"></i><span>Pesanan</span>
             </a>
             @endauth
