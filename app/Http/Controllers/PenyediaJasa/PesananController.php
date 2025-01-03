@@ -44,7 +44,30 @@ class PesananController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Ambil pesanan berdasarkan ID dan hubungkan dengan relasi yang relevan
+    $pesanan = Pesanan::with('user', 'layananJasa')->findOrFail($id);
+
+    // Pastikan pesanan tersebut milik penyedia jasa yang sedang login
+    $penyediaJasa = Auth::user()->penyediaJasa;
+    if ($pesanan->penyedia_jasa_id !== $penyediaJasa->id) {
+        abort(403, 'Anda tidak memiliki akses ke pesanan ini.');
+    }
+
+    return view('penyediajasa.pesanan.show', compact('pesanan'));
+    }
+
+    public function edit($id)
+    {
+        // Cari pesanan berdasarkan ID
+        $pesanan = Pesanan::findOrFail($id);
+
+        // Pastikan pesanan milik penyedia jasa yang sedang login
+        $penyediaJasa = Auth::user()->penyediaJasa;
+        if ($pesanan->penyedia_jasa_id !== $penyediaJasa->id) {
+            abort(403, 'Anda tidak memiliki akses untuk mengedit pesanan ini.');
+        }
+
+        return view('penyediajasa.pesanan.edit', compact('pesanan'));
     }
 
     /**
@@ -52,7 +75,26 @@ class PesananController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validasi input
+    $validated = $request->validate([
+        'status_pesanan' => 'required|string|max:255',
+        'status_pembayaran' => 'required|string|max:255',
+    ]);
+
+    // Cari pesanan berdasarkan ID
+    $pesanan = Pesanan::findOrFail($id);
+
+    // Pastikan pesanan milik penyedia jasa yang sedang login
+    $penyediaJasa = Auth::user()->penyediaJasa;
+    if ($pesanan->penyedia_jasa_id !== $penyediaJasa->id) {
+        abort(403, 'Anda tidak memiliki akses untuk mengedit pesanan ini.');
+    }
+
+    // Update data pesanan
+    $pesanan->update($validated);
+
+    return redirect()->route('penyediajasa.pesanan.index')
+        ->with('success', 'Pesanan berhasil diperbarui.');
     }
 
     /**

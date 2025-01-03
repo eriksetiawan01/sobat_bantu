@@ -62,6 +62,11 @@ class PesananController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pesanan = Pesanan::findOrFail($id);
+
+    // Hapus data pesanan
+    $pesanan->delete();
+
+    return redirect()->route('user.pesanan')->with('success', 'Pesanan berhasil dihapus.');
     }
 }

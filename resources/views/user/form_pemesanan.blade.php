@@ -18,7 +18,7 @@
   </section>
   
   <section class="max-w-4xl mx-auto my-10 p-6 bg-white rounded shadow-2xl">
-    <form method="POST" action="{{ route('form_pemesanan.store') }}" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <form method="POST" action="{{ route('form_pemesanan.store') }}" class="grid grid-cols-1 md:grid-cols-2 gap-6" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="layanan_jasa_id" value="{{ $layanan->id }}">
         <input type="hidden" name="penyedia_jasa_id" value="{{ $layanan->penyedia_jasa_id }}">
@@ -60,6 +60,25 @@
                 Harga *
             </label>
             <input class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" id="harga" name="harga" placeholder="Rp . . . . . . . . . . . . . . ." type="number"/>
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700" for="metode_pembayaran">
+                Metode Pembayaran *
+            </label>
+            <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" id="metode_pembayaran_id" name="metode_pembayaran_id" required>
+                <option value="">Pilih metode pembayaran</option>
+                @foreach ($jenisPembayaran as $jenis)
+                    <option value="{{ $jenis->id }}">
+                        {{ $jenis->jenis_pembayaran }} - {{ $jenis->nomor }}
+                    </option>
+                @endforeach
+            </select>
+        </div>        
+        <div>
+            <label class="block text-sm font-medium text-gray-700" for="bukti_pembayaran">
+                Bukti Pembayaran
+            </label>
+            <input type="file" id="bukti_pembayaran" name="bukti_pembayaran" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
         </div>
         <div class="md:col-span-2 flex justify-end">
             <button class="bg-blue-900 text-white px-6 py-2 rounded" type="submit">

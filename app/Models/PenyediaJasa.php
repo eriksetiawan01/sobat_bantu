@@ -22,4 +22,14 @@ class PenyediaJasa extends Model
     {
         return $this->hasMany(LayananJasa::class);
     }
+
+    public function jenisPembayaran()
+    {
+        return $this->hasMany(JenisPembayaran::class); // Relasi hasMany dengan JenisPembayaran
+    }
+
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class);
+    }
 }

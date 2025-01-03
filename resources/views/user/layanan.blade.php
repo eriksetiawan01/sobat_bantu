@@ -20,8 +20,9 @@
     <div class="flex items-center gap-4 mb-8">
       <!-- Search Bar -->
       <div class="flex flex-1 items-center bg-white border-2 border-[#74767E] shadow-md rounded-md p-2">
-        <input type="text" placeholder="Search here..." class="w-full border-0 focus:ring-0 focus:outline-none text-sm">
+        <input type="text" id="searchInput" placeholder="Search here..." class="w-full border-0 focus:ring-0 focus:outline-none text-sm">
       </div>
+
       <!-- Dropdown Filter -->
       <div class="relative">
         <!-- Button with Filter Icon -->
@@ -34,36 +35,68 @@
 
         <!-- Dropdown Menu -->
         <div id="filterDropdown" class="hidden absolute mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg">
-          <ul class="py-2 text-sm text-gray-700">
-            <li>
-              <button class="w-full text-left px-4 py-2 hover:bg-gray-100 focus:outline-none">
-                <span class="flex items-center space-x-2">
-                  <span class="text-gray-600">🏠</span>
-                  <span>Rumah</span>
-                </span>
-              </button>
-            </li>
-            <li>
-              <button class="w-full text-left px-4 py-2 hover:bg-gray-100 focus:outline-none">
-                <span class="flex items-center space-x-2">
-                  <span class="text-gray-600">🚗</span>
-                  <span>Kendaraan</span>
-                </span>
-              </button>
-            </li>
-            <li>
-              <button class="w-full text-left px-4 py-2 hover:bg-gray-100 focus:outline-none">
-                <span class="flex items-center space-x-2">
-                  <span class="text-gray-600">🐾</span>
-                  <span>Hewan</span>
-                </span>
-              </button>
-            </li>
+          <ul class="py-2 text-sm text-black">
+            <form action="{{ route('user.layanan') }}" method="GET">
+              @foreach($kategoris as $kategori)
+                <li>
+                  <button type="submit" name="kategori_id" value="{{ $kategori->id }}" class="w-full text-left px-4 py-2 hover:bg-gray-100 focus:outline-none">
+                    <span class="flex items-center space-x-2">
+                      <!-- Icon Dinamis Berdasarkan Kategori -->
+                      @if($kategori->nama == 'Rumah Tangga')
+                        <i class="fas fa-home"></i>
+                      @elseif($kategori->nama == 'Transportasi')
+                        <i class="fas fa-car"></i>
+                      @elseif($kategori->nama == 'Elektronik')
+                        <i class="fas fa-tv"></i>
+                      @endif
+                      <span>{{ $kategori->nama }}</span>
+                    </span>
+                  </button>
+                </li>
+              @endforeach
+            </form>
           </ul>
         </div>
       </div>
 
+
+      </div>
+
       <script>
+        // Search
+            document.getElementById('searchInput').addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase(); // Mengambil input pencarian dan ubah menjadi huruf kecil
+        const layananCards = document.querySelectorAll('#layanan-container .bg-white'); // Ambil semua card layanan
+
+        layananCards.forEach(function(card) {
+          const layananName = card.querySelector('h3').textContent.toLowerCase(); // Ambil nama layanan dari setiap card
+
+          if (layananName.includes(searchTerm)) {
+            card.classList.remove('hidden'); // Tampilkan card jika nama layanan cocok dengan pencarian
+          } else {
+            card.classList.add('hidden'); // Sembunyikan card jika nama layanan tidak cocok
+          }
+        });
+      });
+                      document.querySelectorAll('.filter-btn').forEach(button => {
+          button.addEventListener('click', function() {
+            const categoryId = this.dataset.kategori;
+            filterLayananByCategory(categoryId);
+            filterDropdown.classList.add('hidden'); // Close dropdown after selection
+          });
+        });
+
+        function filterLayananByCategory(categoryId) {
+          // Menyembunyikan semua layanan terlebih dahulu
+          const allLayanan = document.querySelectorAll('.layanan-card');
+          allLayanan.forEach(card => card.classList.add('hidden'));
+
+          // Menampilkan layanan yang sesuai dengan kategori
+          const filteredLayanan = document.querySelectorAll(`#layanan-container .layanan-card[data-kategori="${categoryId}"]`);
+          filteredLayanan.forEach(card => card.classList.remove('hidden'));
+        }
+
+                    
         // Toggle dropdown menu
         const filterButton = document.getElementById('filterButton');
         const filterDropdown = document.getElementById('filterDropdown');

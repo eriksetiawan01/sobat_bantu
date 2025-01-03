@@ -14,7 +14,7 @@ class Pesanan extends Model
     protected $fillable = [
         'user_id', 'layanan_jasa_id', 'penyedia_jasa_id', 'nama_lengkap', 
         'alamat', 'no_telepon', 'waktu_pemesanan', 'jam_pemesanan', 
-        'detail_pekerjaan', 'harga', 'status_pembayaran', 'status_pesanan', 'ulasan'
+        'detail_pekerjaan', 'harga', 'metode_pembayaran_id', 'status_pembayaran', 'status_pesanan', 'ulasan', 'bukti_pembayaran'
     ];
 
     public function user()
@@ -30,5 +30,11 @@ class Pesanan extends Model
     public function penyediaJasa()
     {
         return $this->belongsTo(User::class, 'penyedia_jasa_id');
+    }
+
+    // Relasi ke jenis pembayaran berdasarkan penyedia jasa
+    public function jenisPembayaran()
+    {
+        return $this->belongsTo(JenisPembayaran::class,  'metode_pembayaran_id');
     }
 }

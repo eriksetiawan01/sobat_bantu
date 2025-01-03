@@ -4,7 +4,6 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 
-
 // tamu
 use App\Http\Controllers\Tamu\BerandaController as TamuBerandaController;
 use App\Http\Controllers\Tamu\LayananJasaController as TamuLayananJasaController;
@@ -20,11 +19,12 @@ use App\Http\Controllers\Admin\LayananJasaController as AdminLayananJasaControll
 use App\Http\Controllers\Admin\KategoriController as AdminKategoriController;
 use App\Http\Controllers\Admin\PenyediaJasaController as AdminPenyediaJasaController;
 use App\Http\Controllers\Admin\PenggunaController as AdminPenggunaController;
-
+use App\Http\Controllers\Admin\PesananController as AdminPesananController;
 
 // Penyedia Jasa
 use App\Http\Controllers\PenyediaJasa\LayananJasaController as PenyediaJasaLayananJasaController;
-use App\Http\Controllers\PenyediaJasa\PesananController as PenyediaPesananController;
+use App\Http\Controllers\PenyediaJasa\PesananController as PenyediaJasaPesananController;
+use App\Http\Controllers\PenyediaJasa\JenisPembayaranController as PenyediaJasaJenisPembayaranController;
 
 Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
 Route::middleware('auth')->group(function () {
@@ -39,12 +39,10 @@ Route::middleware('auth')->group(function () {
     // Pemesanan
     Route::get('/form_pemesanan/{layanan_id}', [PenggunaFormPemesananController::class, 'index'])->name('form_pemesanan');
     Route::post('/form_pemesanan', [PenggunaFormPemesananController::class, 'store'])->name('form_pemesanan.store');
+    // Pesanan
     Route::get('/user/pesanan', [PenggunaPesananController::class, 'index'])->name('user.pesanan');
     Route::get('/user/pesanan/{id}', [PenggunaPesananController::class, 'show'])->name('user.pesanan.show');
-
-
-    
-
+    Route::delete('/user/pesanan/{id}', [PenggunaPesananController::class, 'destroy'])->name('user.pesanan.destroy');
 
     // Route Role Admin
     Route::get('/dashboard', function () {
@@ -87,6 +85,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/dashboard/penyediajasa/{id}', [AdminPenyediaJasaController::class, 'update'])->name('admin.penyediajasa.update');
     Route::delete('/dashboard/penyediajasa/{id}', [AdminPenyediaJasaController::class, 'destroy'])->name('admin.penyediajasa.destroy');
 
+    // route untuk pesanan
+    Route::get('/admin/pesanan', [AdminPesananController::class, 'index'])->name('admin.pesanan.index');
+
+
     // Route Penyedia Jasa
     Route::get('/penyediajasa/index', function () {
         return view('penyediajasa.index');
@@ -97,8 +99,20 @@ Route::middleware('auth')->group(function () {
         Route::post('/penyediajasa/{id}/layananjasa', [PenyediaJasaLayananJasaController::class, 'store'])->name('penyediajasa.layananjasa.store');
 
     // Pesanan
-    Route::get('/penyediajasa/pesanan', [PenyediaPesananController::class, 'index'])->name('penyediajasa.pesanan.index');
+    Route::get('/penyediajasa/pesanan', [PenyediaJasaPesananController::class, 'index'])->name('penyediajasa.pesanan.index');
+    Route::get('/penyediajasa/pesanan/{id}', [PenyediaJasaPesananController::class, 'show'])->name('penyediajasa.pesanan.show');
+    Route::get('/penyediajasa/pesanan/{id}/edit', [PenyediaJasaPesananController::class, 'edit'])->name('penyediajasa.pesanan.edit');
+    Route::put('/penyediajasa/pesanan/{id}', [PenyediaJasaPesananController::class, 'update'])->name('penyediajasa.pesanan.update');
 
+
+
+    // Route Jenis Pembayaran
+    Route::get('/penyediajasa/jenispembayaran', [PenyediaJasaJenisPembayaranController::class, 'index'])->name('penyediajasa.jenispembayaran.index');
+    Route::get('/penyediajasa/jenispembayaran/create', [PenyediaJasaJenisPembayaranController::class, 'create'])->name('penyediajasa.jenispembayaran.create');
+    Route::post('/penyediajasa/jenispembayaran', [PenyediaJasaJenisPembayaranController::class, 'store'])->name('penyediajasa.jenispembayaran.store');
+    Route::get('/penyediajasa/jenispembayaran/{id}/edit', [PenyediaJasaJenisPembayaranController::class, 'edit'])->name('penyediajasa.jenispembayaran.edit');
+    Route::put('/penyediajasa/jenispembayaran/{id}', [PenyediaJasaJenisPembayaranController::class, 'update'])->name('penyediajasa.jenispembayaran.update');
+    Route::delete('/penyediajasa/jenispembayaran/{id}', [PenyediaJasaJenisPembayaranController::class, 'destroy'])->name('penyediajasa.jenispembayaran.destroy');
 
 });
 

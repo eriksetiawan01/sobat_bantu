@@ -39,8 +39,10 @@
             <th class="py-3 px-2 sm:px-4 border">Jam Pemesanan</th>
             <th class="py-3 px-2 sm:px-4 border">Detail Pekerjaan</th>
             <th class="py-3 px-2 sm:px-4 border">Harga</th>
+            <th class="py-3 px-2 sm:px-4 border">Metode Pembayaran</th>
             <th class="py-3 px-2 sm:px-4 border">Status Pembayaran</th>
             <th class="py-3 px-2 sm:px-4 border">Status Pesanan</th>
+            <th class="py-3 px-2 sm:px-4 border">Bukti Pembayaran</th>
           </tr>
         </thead>
         <tbody>
@@ -56,6 +58,16 @@
             <td class="py-2 px-2 sm:px-4 border">Rp {{ number_format($pesanan->harga, 2, ',', '.') }}</td>
             <td class="py-2 px-2 sm:px-4 border">{{ $pesanan->status_pembayaran }}</td>
             <td class="py-2 px-2 sm:px-4 border">{{ $pesanan->status_pesanan }}</td>
+            <td class="py-2 px-2 sm:px-4 border">{{ $pesanan->jenisPembayaran->jenis_pembayaran ?? '-' }}</td>
+            <td class="py-2 px-2 sm:px-4 border">
+              @if($pesanan->bukti_pembayaran)
+                <a href="{{ asset('storage/' . $pesanan->bukti_pembayaran) }}" class="text-blue-500 font-bold text-xs sm:text-sm" title="Lihat Bukti Pembayaran" target="_blank">
+                  <i class="fa fa-image"></i> Lihat
+                </a>
+              @else
+                <span class="text-gray-500">Belum ada bukti pembayaran</span>
+              @endif
+            </td>
           </tr>
         </tbody>
       </table>
