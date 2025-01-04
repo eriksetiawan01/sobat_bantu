@@ -28,8 +28,4 @@ class PenyediaJasa extends Model
         return $this->hasMany(JenisPembayaran::class); // Relasi hasMany dengan JenisPembayaran
     }
 
-    public function transaksi()
-    {
-        return $this->hasMany(Transaksi::class);
-    }
 }

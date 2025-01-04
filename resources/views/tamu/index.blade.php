@@ -103,30 +103,21 @@
   
 
   <!-- Layanan Favorit -->
-  <section class="bg-[#f9f9f9] py-16">
-    <div class="container mx-auto text-center">
+<section class="bg-[#f9f9f9] py-16">
+  <div class="container mx-auto text-center">
       <h2 class="text-5xl font-bold mb-8 text-[#27547D]">Layanan Favorit</h2>
-      <p class="text-lg text-gray-700 mb-8">Pilihan layanan yang paling sering digunakan oleh pelanggan kami!</p>
+      <p class="text-lg text-gray-700 mb-8">Pilihan layanan yang paling sering dipesan oleh pelanggan kami!</p>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 mx-8">
-        <div class="bg-white p-6 rounded-lg shadow-lg">
-          <img src="path/to/pindahan-icon.png" alt="Pindahan" class="w-24 mx-auto mb-4"/>
-          <h3 class="font-semibold text-xl">Pindahan</h3>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-lg">
-          <img src="path/to/angkut-barang-icon.png" alt="Angkut Barang" class="w-24 mx-auto mb-4"/>
-          <h3 class="font-semibold text-xl">Angkut Barang</h3>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-lg">
-          <img src="path/to/bersih-bersih-icon.png" alt="Bersih-bersih" class="w-24 mx-auto mb-4"/>
-          <h3 class="font-semibold text-xl">Bersih-bersih</h3>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-lg">
-          <img src="path/to/antar-jemput-icon.png" alt="Antar/Jemput" class="w-24 mx-auto mb-4"/>
-          <h3 class="font-semibold text-xl">Antar/Jemput</h3>
-        </div>
+          @foreach($layananFavorit as $layanan)
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+              <img src="{{ asset('asset/img/' . ($layanan->gambar ? $layanan->gambar : 'default-image.jpg')) }}" class="w-24 mx-auto mb-4"/>
+              <h3 class="font-semibold text-xl">{{ $layanan->namaJasa }}</h3>
+          </div>
+          @endforeach
       </div>
-    </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- Keunggulan Kami -->
   <section class="py-16">
@@ -342,7 +333,7 @@
         <p class="text-xl md:text-2xl lg:text-3xl">Mulai Sekarang</p> <br>
         <h2 class="text-3xl font-bold mb-6 md:text-4xl lg:text-5xl">Ayo Pesan Layanan Sekarang!</h2>
         <p class="text-base md:text-lg mb-6 max-w-3xl mx-auto">Kamu bisa mengikuti prosedur yang telah dijelaskan sesuai langkah yang ada di atas.</p> <br>
-        <a href="#pesan" class="bg-[#3F8CFF] text-white border-2 border-white py-2 px-4 rounded-lg text-sm md:text-base lg:text-lg hover:bg-[#3578d4] transition">
+        <a href="/layanan" class="bg-[#3F8CFF] text-white border-2 border-white py-2 px-4 rounded-lg text-sm md:text-base lg:text-lg hover:bg-[#3578d4] transition">
             <i class="fa-solid fa-paper-plane"></i> Cari layanan
         </a>
     </div>

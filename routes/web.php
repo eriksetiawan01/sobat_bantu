@@ -15,6 +15,7 @@ use App\Http\Controllers\Pengguna\FormPemesananController as PenggunaFormPemesan
 use App\Http\Controllers\Pengguna\PesananController as PenggunaPesananController;
 
 // admin
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\LayananJasaController as AdminLayananJasaController;
 use App\Http\Controllers\Admin\KategoriController as AdminKategoriController;
 use App\Http\Controllers\Admin\PenyediaJasaController as AdminPenyediaJasaController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\Admin\PenggunaController as AdminPenggunaController;
 use App\Http\Controllers\Admin\PesananController as AdminPesananController;
 
 // Penyedia Jasa
+use App\Http\Controllers\PenyediaJasa\DashboardController as PenyediaJasaDashboardController;
 use App\Http\Controllers\PenyediaJasa\LayananJasaController as PenyediaJasaLayananJasaController;
 use App\Http\Controllers\PenyediaJasa\PesananController as PenyediaJasaPesananController;
 use App\Http\Controllers\PenyediaJasa\JenisPembayaranController as PenyediaJasaJenisPembayaranController;
@@ -45,9 +47,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/user/pesanan/{id}', [PenggunaPesananController::class, 'destroy'])->name('user.pesanan.destroy');
 
     // Route Role Admin
-    Route::get('/dashboard', function () {
-        return view('admin.index');
-    })->name('admin.index');
+    // Route::get('/dashboard', function () {
+    //     return view('admin.index');
+    // })->name('admin.index');
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.index');
 
     // route untuk data layanan jasa
     Route::get('/dashboard/layananjasa', [AdminLayananJasaController::class, 'index'])->name('admin.layananjasa.index'); // Menggunakan alias
@@ -86,17 +89,27 @@ Route::middleware('auth')->group(function () {
     Route::delete('/dashboard/penyediajasa/{id}', [AdminPenyediaJasaController::class, 'destroy'])->name('admin.penyediajasa.destroy');
 
     // route untuk pesanan
-    Route::get('/admin/pesanan', [AdminPesananController::class, 'index'])->name('admin.pesanan.index');
+    Route::get('/admin/pesanan', [AdminPesananController::class, 'index'])->name('admin.pesanan');
+    Route::get('admin/pesanan/{id}', [AdminPesananController::class, 'show'])->name('admin.pesanan.show');
+
 
 
     // Route Penyedia Jasa
-    Route::get('/penyediajasa/index', function () {
-        return view('penyediajasa.index');
-    })->name('penyediajasa.index');
+    // Route::get('/penyediajasa/index', function () {
+    //     return view('penyediajasa.index');
+    // })->name('penyediajasa.index');
+    Route::get('/penyediajasa/index', [PenyediaJasaDashboardController::class, 'index'])->name('penyediajasa.index');
     // Layanan Jasa
     Route::get('/penyediajasa/layananjasa', [PenyediaJasaLayananJasaController::class, 'index'])->name('penyediajasa.layananjasa.index');
         Route::get('/penyediajasa/{penyediaId}/layananjasa/create', [PenyediaJasaLayananJasaController::class, 'create'])->name('penyediajasa.layananjasa.create');
         Route::post('/penyediajasa/{id}/layananjasa', [PenyediaJasaLayananJasaController::class, 'store'])->name('penyediajasa.layananjasa.store');
+        Route::get('/penyediajasa/layananjasa/{id}', [PenyediaJasaLayananJasaController::class, 'show'])->name('penyediajasa.layananjasa.show');
+        Route::get('/penyediajasa/layananjasa/{id}/edit', [PenyediaJasaLayananJasaController::class, 'edit'])->name('penyediajasa.layananjasa.edit');
+        Route::put('/penyediajasa/layananjasa/{id}', [PenyediaJasaLayananJasaController::class, 'update'])->name('penyediajasa.layananjasa.update');
+        Route::delete('/penyediajasa/layananjasa/{id}', [PenyediaJasaLayananJasaController::class, 'destroy'])->name('penyediajasa.layananjasa.destroy');
+
+    
+
 
     // Pesanan
     Route::get('/penyediajasa/pesanan', [PenyediaJasaPesananController::class, 'index'])->name('penyediajasa.pesanan.index');

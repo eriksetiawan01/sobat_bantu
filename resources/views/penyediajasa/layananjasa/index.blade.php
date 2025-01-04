@@ -22,9 +22,7 @@
                                 <th class="py-3">Id</th>
                                 <th class="py-3">Gambar</th>
                                 <th class="py-3">Nama Layanan</th>
-                                <th class="py-3">Deskripsi</th>
                                 <th class="py-3">Kategori</th>
-                                <th class="py-3">Harga</th>
                                 <th class="py-3">Aksi</th>
                             </tr>
                         </thead>
@@ -42,22 +40,20 @@
                                         @endif
                                     </td>
                                     <td class="py-2">{{ $layanan->namaJasa }}</td>
-                                    <td class="py-2">{{ substr($layanan->deskripsi, 0, 10) }}{{ strlen($layanan->deskripsi) > 10 ? "..." : "" }}</td>
                                     <td class="py-2">{{ $layanan->kategori->nama }}</td>
-                                    <td class="py-2">{{ $layanan->harga }}</td>
                                     <td class="py-2">
                                         <!-- Tombol Lihat -->
-                                        <a href="{{ url('/dashboard/layananjasa/' . $layanan->id) }}" class="text-warning" title="Lihat">
+                                        <a href="{{ route('penyediajasa.layananjasa.show', $layanan->id) }}" class="text-warning" title="Lihat">
                                             <i class="fa fa-eye"></i>
                                         </a>
 
                                         <!-- Tombol Edit -->
-                                        <a href="{{ url('/dashboard/layananjasa/' . $layanan->id . '/edit') }}" class="text-primary mx-2" title="Edit">
+                                        <a href="{{ route('penyediajasa.layananjasa.edit', $layanan->id ) }}" class="text-primary mx-2" title="Edit">
                                             <i class="fa fa-edit"></i>
                                         </a>
 
                                         <!-- Tombol Hapus -->
-                                        <form action="{{ url('/dashboard/layananjasa/' . $layanan->id) }}" method="POST" class="d-inline">
+                                        <form action="{{ route('penyediajasa.layananjasa.destroy', $layanan->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-danger" title="Hapus">

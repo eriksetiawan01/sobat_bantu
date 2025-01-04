@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Tamu;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Kategori;
+
 
 use App\Models\LayananJasa;
 
@@ -12,10 +14,20 @@ class LayananJasaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $layanan = LayananJasa::with('kategori')->get();
-        return view('tamu.layanan', compact('layanan'));
+        // Ambil semua kategori
+    $kategoris = Kategori::all(); 
+    
+    // Jika ada kategori yang dipilih, filter layanan berdasarkan kategori
+    if ($request->has('kategori_id')) {
+        $layanan = LayananJasa::where('kategori_id', $request->kategori_id)->get();
+    } else {
+        $layanan = LayananJasa::all();
+    }
+
+    return view('tamu.layanan', compact('layanan', 'kategoris'));
+
     }
 
     /**

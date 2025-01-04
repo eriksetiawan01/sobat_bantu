@@ -20,9 +20,7 @@
               <li><a href="/dashboard/penyediajasa"><i class="bi bi-briefcase fs-6"></i><span>Data Penyedia Jasa</span></a></li>
               <li><a href="/dashboard/kategori"><i class="bi bi-tags fs-6"></i><span>Data Kategori</span></a></li>
               <li><a href="/dashboard/layananjasa"><i class="bi bi-box fs-6"></i><span>Data Layanan Jasa</span></a></li>
-              <li><a href="#"><i class="bi bi-receipt fs-6"></i><span>Data Pesanan</span></a></li>
-              <li><a href="#"><i class="bi bi-wallet fs-6"></i><span>Data Transaksi</span></a></li>
-              <li><a href="#"><i class="bi bi-cash fs-6"></i><span>Data Jenis Pembayaran</span></a></li>
+              <li><a href="{{ route('admin.pesanan') }}"><i class="bi bi-receipt fs-6"></i><span>Data Pesanan</span></a></li>
           </ul>
       </li><!-- End Tables Nav -->
       @endif
@@ -34,7 +32,6 @@
           <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
               <li><a href="{{ route('penyediajasa.layananjasa.index', ['penyediaId' => Auth::id()]) }}"><i class="bi bi-box fs-6"></i><span>Data Layanan Jasa</span></a></li>
               <li><a href="{{ route('penyediajasa.pesanan.index', ['penyediaId' => Auth::id()]) }}"><i class="bi bi-receipt fs-6"></i><span>Data Pesanan</span></a></li>
-              <li><a href="#"><i class="bi bi-wallet fs-6"></i><span>Data Transaksi</span></a></li>
               <li><a href="{{ route('penyediajasa.jenispembayaran.index', ['penyediaId' => Auth::id()]) }}"><i class="bi bi-cash fs-6"></i><span>Data Jenis Pembayaran</span></a></li>
 
           </ul>

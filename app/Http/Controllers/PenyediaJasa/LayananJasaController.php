@@ -8,6 +8,8 @@ use App\Models\PenyediaJasa;
 use App\Models\LayananJasa;
 use App\Models\Kategori;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 class LayananJasaController extends Controller
 {
@@ -87,7 +89,30 @@ class LayananJasaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Ambil penyedia jasa yang sedang login
+    $penyediaJasa = Auth::user()->penyediaJasa;
+
+    // Pastikan penyedia jasa yang login memiliki layanan jasa dengan ID tersebut
+    $layananJasa = LayananJasa::where('penyedia_jasa_id', $penyediaJasa->id)
+                               ->findOrFail($id);
+
+    // Tampilkan halaman show dengan data layanan jasa
+    return view('penyediajasa.layananjasa.show', compact('layananJasa', 'penyediaJasa'));
+    }
+
+    public function edit(string $id)
+    {
+        // Ambil penyedia jasa yang sedang login
+        $penyediaJasa = Auth::user()->penyediaJasa;
+
+        // Pastikan penyedia jasa yang login memiliki layanan jasa dengan ID tersebut
+        $layananJasa = LayananJasa::where('penyedia_jasa_id', $penyediaJasa->id)
+                                ->findOrFail($id);
+
+        // Ambil semua kategori untuk dropdown
+        $kategoris = Kategori::all();
+
+        return view('penyediajasa.layananjasa.edit', compact('layananJasa', 'penyediaJasa', 'kategoris'));
     }
 
     /**
@@ -95,14 +120,59 @@ class LayananJasaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validasi input
+    $request->validate([
+        'namaJasa' => 'required|string|max:255',
+        'deskripsi' => 'required|string',
+        'harga' => 'required|numeric',
+        'kategori_id' => 'required|exists:kategori,id',
+        'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    // Ambil penyedia jasa yang sedang login
+    $penyediaJasa = Auth::user()->penyediaJasa;
+
+    // Ambil data layanan jasa yang ingin diubah
+    $layananJasa = LayananJasa::where('penyedia_jasa_id', $penyediaJasa->id)
+                               ->findOrFail($id);
+
+    // Proses upload gambar (jika ada)
+    if ($request->hasFile('gambar')) {
+        $gambarPath = $request->file('gambar')->store('layanan_jasa', 'public');
+        $layananJasa->gambar = $gambarPath;
     }
+
+    // Update layanan jasa
+    $layananJasa->update([
+        'namaJasa' => $request->namaJasa,
+        'deskripsi' => $request->deskripsi,
+        'harga' => $request->harga,
+        'kategori_id' => $request->kategori_id,
+    ]);
+
+    // Redirect ke halaman index layanan jasa
+    return redirect()->route('penyediajasa.layananjasa.index', ['penyediaId' => $penyediaJasa->id])
+                     ->with('success', 'Layanan Jasa berhasil diperbarui!');
+    }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        // Ambil penyedia jasa yang sedang login
+    $penyediaJasa = Auth::user()->penyediaJasa;
+
+    // Pastikan penyedia jasa yang login memiliki layanan jasa dengan ID tersebut
+    $layananJasa = LayananJasa::where('penyedia_jasa_id', $penyediaJasa->id)
+                               ->findOrFail($id);
+
+    // Hapus layanan jasa
+    $layananJasa->delete();
+
+    // Redirect ke halaman index layanan jasa
+    return redirect()->route('penyediajasa.layananjasa.index', ['penyediaId' => $penyediaJasa->id])
+                     ->with('success', 'Layanan Jasa berhasil dihapus!');
     }
 }

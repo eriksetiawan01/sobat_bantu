@@ -14,12 +14,11 @@ class PesananController extends Controller
      */
     public function index()
     {
-        // Mengambil semua data pesanan dari database
-        $pesanans = Pesanan::with(['user', 'layananJasa', 'jenisPembayaran']) // Meload relasi terkait
-                            ->get();
-        
-        // Mengirim data pesanan ke view
-        return view('admin.pesanan.index', compact('pesanans'));
+        // Mengambil semua data pesanan beserta relasi terkait
+    $pesanans = Pesanan::with(['user', 'layananJasa', 'jenisPembayaran', 'penyediaJasa'])->get();
+
+    // Mengirim data ke view
+    return view('admin.pesanan.index', compact('pesanans'));
     }
 
     /**
@@ -35,7 +34,11 @@ class PesananController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Mengambil data pesanan berdasarkan ID beserta relasi yang diperlukan
+    $pesanan = Pesanan::with(['user', 'layananJasa', 'jenisPembayaran', 'penyediaJasa'])->findOrFail($id);
+
+    // Mengirim data pesanan ke view
+    return view('admin.pesanan.show', compact('pesanan'));
     }
 
     /**
